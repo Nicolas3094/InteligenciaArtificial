@@ -1,63 +1,100 @@
 #include "../headers/cola.hpp"
 
-template<typename T> 
-NodoCola<T>::~NodoCola(){}
-template<typename T> 
-NodoCola<T>::NodoCola(){}
-template<typename T> 
-NodoCola<T>::NodoCola(T val, NodoCola* ptr){
-    this->valor=val;
-    this->ptr=ptr;
-}
-template<typename T>
-bool Cola<T>::vacia(){
-    return frente==nullptr;
-}
-
-template<typename T> 
-Cola<T>::~Cola(){}
-template<typename T> 
-Cola<T>::Cola(){
-    cola=nullptr;
-    frente = nullptr;
-}
-template<typename T> 
-void Cola<T>::push(T valor){
-    NodoCola<T>* tmp = new NodoCola<T>(valor, nullptr);
-    if(frente==nullptr){
-        frente=tmp;
-    }
-    if(cola!=nullptr){
-        cola->ptr=tmp;
-    }
-    cola = tmp;
-}
-template<typename T> 
-void Cola<T>::pop(T& val){
-    if(frente==nullptr){
-        return;
-    }
-    NodoCola<T> *tmp;
-    val = frente->valor;
-    tmp=frente;
-    frente=tmp->ptr;
-    tmp->~NodoCola();
-   
-}
-template<typename T>
-void Cola<T>::recorrer(void(*fn)(NodoCola<T>*)){
-    if(frente==nullptr){
-        return;
-    }
-    NodoCola<T> *ini, *fin;
-    ini = frente;
-    while (ini!=nullptr)
+template <typename T>
+Cola<T>::~Cola()
+{
+    T tmp;
+    while (frente != nullptr)
     {
-        fn(ini);
-        ini=ini->ptr;
+        pop(tmp);
     }
-    
 }
-template class Cola<int>;
-template class Cola<Nodo*>;
 
+template <typename T>
+bool Cola<T>::vacia()
+{
+    return frente == nullptr;
+}
+
+template <typename T>
+Cola<T>::Cola():tamano(0)
+{
+    cola, frente = nullptr;
+}
+template <typename T>
+void Cola<T>::push(T valor)
+{
+    NodoSingular<T> *tmp = new NodoSingular<T>(valor);
+
+    if (frente == nullptr)
+        frente = tmp;
+
+    if (cola != nullptr)
+        cola->ptr = tmp;
+
+    cola = tmp;
+    tamano++;
+
+    tmp = nullptr;
+    tmp->~NodoSingular();
+}
+
+template <typename T>
+void Cola<T>::pop(T &val)
+{
+    if (frente == nullptr)
+        return;
+
+    NodoSingular<T> *tmp;
+    val = frente->valor;
+    tmp = frente;
+    frente = tmp->ptr;
+    tamano--;
+    tmp = nullptr;
+    tmp->~NodoSingular();
+}
+template <typename T>
+void Cola<T>::recorrer(const function<void(T, bool &)> &fn, bool romper)
+{
+    if (frente == nullptr)
+        return;
+
+    NodoSingular<T> *ini, *fin;
+    ini = frente;
+    romper=false;
+    while (ini != nullptr && !romper)
+    {
+        fn(ini->valor, romper);
+        ini = ini->ptr;
+    }
+    ini->~NodoSingular();
+    fin->~NodoSingular();
+}
+
+template <typename T>
+T Cola<T>::operator[](int index)
+{
+    if(index<0 || index > tamano-1)
+        throw invalid_argument("Index out of range");
+    int i = 0;
+    NodoSingular<T> *ini;
+    T tmp;
+    ini = frente;
+    while (ini != nullptr)
+    {
+        if (i == index)
+        {
+            tmp = frente->valor;
+            break;
+        }
+        i++;
+    }
+    ini = ini == nullptr ? ini : nullptr;
+    ini->~NodoSingular();
+
+    return tmp;
+
+}
+
+template class Cola<Nodo*>;
+template class Cola<int>;

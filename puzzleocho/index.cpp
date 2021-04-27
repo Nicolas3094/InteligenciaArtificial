@@ -1,8 +1,9 @@
-#include <iostream>
 #include "headers/exe.hpp"
-#include <math.h>
-int main(){
-
-        exePila();
-        std::cin.get();
+#include "headers/mainh.hpp"
+int main()
+{
+        
+        exe();
+        cin.get();
 }
+

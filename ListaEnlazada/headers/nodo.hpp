@@ -2,7 +2,6 @@
 #define nodo_h
 
 class nodo{
-        
     public:
         int info;
         int prioridad;

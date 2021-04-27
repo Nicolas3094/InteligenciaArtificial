@@ -31,6 +31,7 @@ void Cola::pop(){
     nodo *tmp;
     tmp = frente;
     frente=tmp->ptr;
+    tmp=nullptr;
     delete tmp;
 }
 void Cola::print(){

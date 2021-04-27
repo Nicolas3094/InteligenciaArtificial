@@ -1,30 +1,23 @@
 #ifndef COLA_H
 #define COLA_H
-#include "nodo.hpp"
-template <typename T>
-class NodoCola
-{
-public:
-    T valor;
-    NodoCola<T> *ptr;
-    NodoCola();
-    NodoCola(T, NodoCola<T>*);
-    ~NodoCola();
-};
-
+#include "NodoSingular.hpp"
 template <typename T>
 class Cola
 {
-private:
-    NodoCola<T> *frente;
-    NodoCola<T> *cola;
+    int tamano;
 public:
+    NodoSingular<T>* frente;
+    NodoSingular<T>* cola;
+
     Cola();
     ~Cola();
+    
     void push(T);
     void pop(T&);
     bool vacia();
-    void recorrer(void(*)(NodoCola<T> *));
+    void recorrer(const function<void(T, bool &)>&, bool);
+
+    T operator [](int);
 };
 
 #endif

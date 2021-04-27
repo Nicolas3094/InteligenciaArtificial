@@ -1,27 +1,20 @@
 #ifndef NODO_H
 #define NODO_H
 #include "estado.hpp"
-#include "cola.hpp"
 
-
-typedef struct Nodo{
-    int costo;
-    int profundidad;
-    Nodo* padre;
-    Estado* estado;
-}Nodo;
-
-class Arbol{
-    private:
-        Nodo* vertice;
-        Tablero* tab;
+class Nodo{
     public:
-        Arbol(Tablero&);
-        Nodo* crearNodo(int, int, Nodo*, Estado*);
-        std::list<Nodo*> hijosNodo(Nodo*);
-        void MostarCamino(Nodo*);
-        void BFS(Estado&);
+        Nodo();
+        Nodo(Estado &);
+        Nodo(Nodo*, Estado &);
+        Nodo(int,Nodo*, Estado &);
+        Nodo(int, int, Nodo*,Estado &);
+        ~Nodo();
+
+        int costo;
+        int profundidad;
+        
+        Nodo* padre;
+        Estado* estado;
 };
-
-
 #endif //NODO_H

@@ -2,36 +2,25 @@
 #define ESTADO_H
 #include "mainh.hpp"
 
-
 typedef enum Mover {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    MOVE_MAX
-} Mover;
+    ARRIBA,
+    ABAJO,
+    IZQUIERDA,
+    DERECHA,
+    MAX
+} Accion;
 
-typedef struct estado
-{
-    Mover mov;
-    int tab[ANCHURA_MAX][ALTURA_MAX];
-}Estado;
-
-class Tablero{
+class Estado{
     public:
-        Estado* actualEstado;
+        Accion mov;
+        int tab[ANCHURA_MAX][ALTURA_MAX];
+        int cero[2];
+        Estado();
+        Estado(Accion);
+        ~Estado();
 
-        Tablero();
-        ~Tablero();
-        void Mostrar(const Estado&);
-        Estado* MoverEstado(Mover, Estado*);
-        bool EstadosIguales(const Estado&,const Estado&);
-        Estado* EstadoMeta();
-        Estado* EstadoInicial();
-        Estado* ConstruirEstado();
-        Estado* posicionCero(int &, int &, Estado&);
-
+        void operator=(const Estado& ) ;
+        bool operator==(const Estado& ) const;
+        bool operator!=(const Estado& ) const;
 };
-
-
 #endif //ESTADO_H

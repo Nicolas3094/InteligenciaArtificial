@@ -7,7 +7,6 @@ class ColaPrioridad {
         nodo* frente;
     public:
         ColaPrioridad();
-        
         void push();
         void pop();
         void print();
