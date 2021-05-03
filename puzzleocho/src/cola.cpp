@@ -3,7 +3,12 @@
 template <typename T>
 Cola<T>::~Cola()
 {
-    while (frente != nullptr)
+    vaciar();
+}
+template <typename T>
+void Cola<T>::vaciar()
+{
+   while (frente != nullptr)
     {
         pop();
     }
@@ -59,23 +64,17 @@ T Cola<T>::pop()
     return valTemp;
 }
 template <typename T>
-void Cola<T>::recorrer(const function<void(T, bool &)> &fn, bool romper)
+void Cola<T>::imprimir()
 {
-    if (frente == nullptr)
-        return;
-
-    NodoSingular<T> *ini, *fin;
-    ini = frente;
-    romper = false;
-    while (ini != nullptr && !romper)
+    NodoSingular<T> *tmp;
+    tmp = frente;
+    while (tmp != nullptr)
     {
-        fn(ini->valor, romper);
-        ini = ini->ptr;
+        cout << " |v: " << tmp->valor << "| -> ";
+        tmp = tmp->ptr;
     }
-    ini->~NodoSingular();
-    fin->~NodoSingular();
+    print("null");
 }
-
 template <typename T>
 T Cola<T>::operator[](int index)
 {
@@ -101,4 +100,3 @@ T Cola<T>::operator[](int index)
 }
 
 template class Cola<Nodo *>;
-template class Cola<int>;

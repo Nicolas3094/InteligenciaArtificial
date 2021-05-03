@@ -9,14 +9,15 @@ void As::Resolver(Nodo **raiz, int &pasos)
 
     map<long long int, bool> visitados;
 
-    ColaPrioridad<Nodo*, As> cola;
-    
-    
+    ColaPrioridad<Nodo*> cola([this](Nodo* nd)->long{
+        return CostoTotal(*nd);
+    });
+        
     Estado meta = Tablero::EstadoMeta();
 
     pasos = 0;
 
-    cola.push(*raiz, CostoTotal(**raiz));
+    cola.push(*raiz);
 
     Nodo *root = *raiz;
 
@@ -51,7 +52,7 @@ void As::Resolver(Nodo **raiz, int &pasos)
 
                 visitados[llave] = true;
 
-                cola.push(nodoV, CostoTotal(*nodoV));
+                cola.push(nodoV);
             }
         }
         pasos++;

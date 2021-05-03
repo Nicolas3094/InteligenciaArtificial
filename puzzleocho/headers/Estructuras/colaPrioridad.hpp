@@ -2,22 +2,22 @@
 #define ColaPrioridad_H
 
 #include "NodoPrioridad.hpp"
-#include "../Algoritmo/As.hpp"
 
-template <typename T, typename K>
+template <typename T>
 class ColaPrioridad{
-public:
+    int tamano;
+    function<long(T)> lambda;
     NodoPrioridad<T>* frente;
-    long (K::*eval)(T);
-    
-    ColaPrioridad();
-    void push(T, long);
+public:
+    ColaPrioridad(function<long(T)>);
+    ~ColaPrioridad();
+
+    void push(T);
     T pop();
     bool vacia();
     void vaciar();
     void imprimir();
+    T operator [](int);
 };
 
-
-
-#endif //ColaPrioridad_HA
+#endif //ColaPrioridad_H

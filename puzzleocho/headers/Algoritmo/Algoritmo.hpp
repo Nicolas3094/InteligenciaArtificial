@@ -3,7 +3,6 @@
 
 #include "../Estructuras/nodo.hpp"
 
-
 class Algoritmo{
 public:
     virtual void Resolver(Nodo**, int&)=0;
