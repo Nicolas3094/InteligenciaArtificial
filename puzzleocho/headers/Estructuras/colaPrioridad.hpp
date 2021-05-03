@@ -1,10 +1,11 @@
 #ifndef ColaPrioridad_H
 #define ColaPrioridad_H
 
+#include "ComunStr.hpp"
 #include "NodoPrioridad.hpp"
 
 template <typename T>
-class ColaPrioridad{
+class ColaPrioridad : ComunStr<T>{
     int tamano;
     function<long(T)> lambda;
     NodoPrioridad<T>* frente;

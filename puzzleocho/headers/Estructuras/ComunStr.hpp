@@ -1,5 +1,5 @@
 #ifndef COMUNSTR_H
-#define COMUNSTR_
+#define COMUNSTR_H
 
 template<typename T>
 class ComunStr
@@ -11,7 +11,5 @@ public:
     virtual void vaciar()=0;
     
 };
-
-
 
 #endif

@@ -1,10 +1,11 @@
 #ifndef COLA_H
 #define COLA_H
 
+#include "ComunStr.hpp"
 #include "NodoSingular.hpp"
 
 template <typename T>
-class Cola{
+class Cola : ComunStr<T>{
     int tamano;
     NodoSingular<T>* frente;
     NodoSingular<T>* cola;
