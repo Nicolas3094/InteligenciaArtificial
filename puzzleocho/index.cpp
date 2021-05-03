@@ -2,8 +2,6 @@
 #include "headers/mainh.hpp"
 int main()
 {
-        
         exe();
-        cin.get();
+        return 0;
 }
-

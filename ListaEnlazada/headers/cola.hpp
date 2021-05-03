@@ -1,17 +1,19 @@
 #ifndef COLA_P
 #define COLA_P
 #include "enlazada.hpp"
+#include "comun.hpp"
 
-class Cola {
+template<typename T>
+class Cola : EstructuraComun<T>{
     private:
-        nodo* frente;
-        nodo* cola;
+        nodo<T>* frente;
+        nodo<T>* cola;
     public:
         Cola();
-        
-        void push();
-        void pop();
+        void push(T, long);
+        T pop();
         void print();
+        bool vacia();
 };
 
 #endif //COLA_P

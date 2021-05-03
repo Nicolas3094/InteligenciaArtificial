@@ -1,28 +1,32 @@
-#include "../headers/enlazada.hpp"
-#include "../headers/colaPrioridad.hpp"
-void exePila()
+#include "../headers/exe.hpp"
+void exePila(EstructuraComun<int>* estructura)
 {
     char opt;
-    int choice;
-    ColaPrioridad So;
+    int choice, prior;
     while(1)
     {
         //The menu options are listed below
-        std::cout <<"\n1.PUSH\n";
-        std::cout <<"2.POP\n";
-        std::cout <<"3.DISPLAY\n";
-        std::cout <<"4.EXIT\n";
-        std::cout <<"\nEnter your choice : ";
-        std::cin >> choice;
+        cout <<"\n1.PUSH\n";
+        cout <<"2.POP\n";
+        cout <<"3.DISPLAY\n";
+        cout <<"4.EXIT\n";
+        cout <<"\nEnter your choice : ";
+        cin >> choice;
 
         if( choice==1){
-            So.push(); //push function is called
+            out("Digite valor");
+            cin>>choice;
+            out("Digite prioridad: ");
+            cin>>prior;
+            estructura->push(choice,prior);
         }
          else if( choice==2){
-            So.pop(); //pop function is called
+            int elemento;
+            elemento = estructura->pop();
+            out("Se ha liberado: "<<elemento);
          }
          else if( choice==3){
-            So.print(); //display function is called
+            estructura->print(); //display function is called
          }
          else if( choice==4){
             break;

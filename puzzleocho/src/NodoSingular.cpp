@@ -1,17 +1,16 @@
-#include "../headers/NodoSingular.hpp"
+#include "../headers/Estructuras/NodoSingular.hpp"
 
 template <typename T>
-NodoSingular<T>::NodoSingular():ptr(nullptr){}
+NodoSingular<T>::NodoSingular() : ptr(nullptr) {}
 
 template <typename T>
-NodoSingular<T>::NodoSingular(T val):valor(val), ptr(nullptr){}
+NodoSingular<T>::NodoSingular(T val) : valor(val), ptr(nullptr) {}
 
 template <typename T>
-NodoSingular<T>::NodoSingular(T val, NodoSingular<T>* cola):valor(val), ptr(cola){}
+NodoSingular<T>::NodoSingular(T val, NodoSingular<T> *cola) : valor(val), ptr(cola) {}
 
 template <typename T>
-NodoSingular<T>::~NodoSingular(){}
+NodoSingular<T>::~NodoSingular() {}
 
+template class NodoSingular<Nodo *>;
 template class NodoSingular<int>;
-template class NodoSingular<Nodo*>;
-template class NodoSingular<Estado*>;

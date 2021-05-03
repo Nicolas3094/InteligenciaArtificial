@@ -1,15 +1,17 @@
 #ifndef COLA_P
 #define COLA_P
 #include "enlazada.hpp"
-
-class ColaPrioridad {
+#include "comun.hpp"
+template<typename T>
+class ColaPrioridad :EstructuraComun<T>{
     private:
-        nodo* frente;
+        nodo<T>* frente;
     public:
         ColaPrioridad();
-        void push();
-        void pop();
+        void push(T, long);
+        T pop();
         void print();
+        bool vacia();
 };
 
 #endif //COLA_P

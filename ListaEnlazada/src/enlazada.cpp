@@ -1,7 +1,8 @@
 #include "../headers/enlazada.hpp"
-Enlazada::Enlazada(){
-    inicio = NULL;
+template<typename T>
+Enlazada<T>::Enlazada(){
+    inicio = nullptr;
 }
 DobleEnlazada::DobleEnlazada(){
-    inicio=NULL;
+    inicio=nullptr;
 }

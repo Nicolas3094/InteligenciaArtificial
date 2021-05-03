@@ -1,15 +1,14 @@
 #include "../headers/listaSingular.hpp"
 
-ListaSingular::ListaSingular(){
+template<typename T>
+ListaSingular<T>::ListaSingular(){}
 
-}
-void ListaSingular::Create_List(int valor){
+template<typename T>
+void ListaSingular<T>::Create_List(T valor){
 
     nodo *q, *tmp;
     //Crear un nodo con el operador new
-    tmp = (nodo *)new(nodo);
-    tmp->info=valor;
-    tmp->ptr=NULL;
+    tmp = new nodo(valor);
 
     //Si la lista esta vacia
     if(inicio==NULL){
@@ -31,20 +30,22 @@ void ListaSingular::Create_List(int valor){
     }
 
 }
-void ListaSingular::AddAtBeg(int data){
+
+template<typename T>
+void ListaSingular<T>::AddAtBeg(T data){
     if(inicio==NULL){
         out("Lista vacia");
         return;
     }
     nodo *tmp;
-    tmp = (nodo *)new(nodo);
-    tmp->info=data;
-    tmp->ptr=inicio;
+    tmp = new nodo(data, inicio);
     inicio=tmp;
 
 
 }
-void ListaSingular::AddAfter(int posicion,int valor){
+
+template<typename T>
+void ListaSingular<T>::AddAfter(int posicion,T valor){
      if(inicio==NULL){
         out("Lista vacia");
         return;
@@ -58,14 +59,16 @@ void ListaSingular::AddAfter(int posicion,int valor){
             return;
         }
     }
-    tmp=(nodo *)new(nodo);
+    tmp=new nodo;
     tmp->info=valor;
     tmp->ptr=q->ptr;
     q->ptr=tmp;
     
 
 }
-void ListaSingular::Delete(){
+
+template<typename T>
+void ListaSingular<T>::Delete(){
     if(inicio==NULL){
         out("Lista vacia");
         return;
@@ -100,7 +103,9 @@ void ListaSingular::Delete(){
     }    
 
 }
-int ListaSingular::Count(){
+
+template<typename T>
+int ListaSingular<T>::Count(){
     if(inicio==NULL){
         out("Lista vacia");
         return 0;
@@ -116,7 +121,8 @@ int ListaSingular::Count(){
     return i;
     
 }
-nodo* ListaSingular::Search(int posicion){
+template<typename T>
+nodo<T>* ListaSingular<T>::Search(int posicion){
     if(inicio==NULL){
         out("Lista vacia");
         return NULL;
@@ -133,7 +139,8 @@ nodo* ListaSingular::Search(int posicion){
     return q;
 
 }
-void ListaSingular::Display(){
+template<typename T>
+void ListaSingular<T>::Display(){
     nodo* q;
     if(inicio == NULL){
         out("Lista vacia");
@@ -149,7 +156,9 @@ void ListaSingular::Display(){
     out("");
     
 }
-void ListaSingular::Reverse(){
+
+template<typename T>
+void ListaSingular<T>::Reverse(){
     if(inicio==NULL){
         out("Lista vacia");
         return;

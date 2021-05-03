@@ -5,16 +5,16 @@ void ListaDoble::Create_List(int valor){
     Nodo *q, *tmp;
     tmp = new Nodo();
     tmp->info=valor;
-    tmp->Lptr=NULL;
-    tmp->Rptr=NULL;
+    tmp->Lptr=nullptr;
+    tmp->Rptr=nullptr;
 
-    if(inicio==NULL){
+    if(inicio==nullptr){
         inicio=tmp;
         return;
     }
     q=inicio;
 
-    while(q->Rptr!=NULL){
+    while(q->Rptr!=nullptr){
         q=q->Rptr;
     }
 
@@ -24,7 +24,7 @@ void ListaDoble::Create_List(int valor){
 
 }
 void ListaDoble::AddAtBeg(int data){
-   if(inicio==NULL){
+   if(inicio==nullptr){
         out("Lista vacia");
         return;
     }
@@ -32,13 +32,13 @@ void ListaDoble::AddAtBeg(int data){
     tmp =new Nodo();
     tmp->info=data;
     tmp->Rptr=inicio;
-    tmp->Lptr=NULL;
+    tmp->Lptr=nullptr;
     inicio->Lptr=tmp;
     inicio=tmp;
 
 }
 void ListaDoble::AddAfter(int posicion,int valor){
-    if(inicio==NULL){
+    if(inicio==nullptr){
         out("Lista vacia");
         return;
     }
@@ -61,7 +61,7 @@ void ListaDoble::AddAfter(int posicion,int valor){
 
 }
 void ListaDoble::Delete(){
-   if(inicio==NULL){
+   if(inicio==nullptr){
         out("Lista vacia");
         return;
     }
@@ -72,7 +72,7 @@ void ListaDoble::Delete(){
     if(pos==1 ){
         tmp=inicio;
         inicio= tmp->Rptr;
-        inicio->Lptr=NULL;
+        inicio->Lptr=nullptr;
         delete tmp;
         return;
     }else if(pos<=0){
@@ -80,29 +80,29 @@ void ListaDoble::Delete(){
         return;
     }
     q=Search(pos-1);
-    if(q==NULL){
+    if(q==nullptr){
         return;
     }
-    if(q->Rptr->Rptr!= NULL){
+    if(q->Rptr->Rptr!= nullptr){
         tmp = q->Rptr;
         q->Rptr=tmp->Rptr;
         tmp->Rptr->Lptr=q;
         delete tmp;
     }else{
         tmp=q->Rptr;
-        q->Rptr=NULL;
+        q->Rptr=nullptr;
         delete tmp;
     } 
 }
 int ListaDoble::Count(){
-   if(inicio==NULL){
+   if(inicio==nullptr){
         out("Lista vacia");
         return 0;
     }
     Nodo* q;
     q=inicio;
     int i=1;
-    while (q->Rptr!= NULL)
+    while (q->Rptr!= nullptr)
     {
         i++;
         q=q->Rptr;
@@ -112,7 +112,7 @@ int ListaDoble::Count(){
 }
 
 Nodo* ListaDoble::Search(int posicion){
- if(inicio==NULL){
+ if(inicio==nullptr){
         out("Lista vacia");
         return NULL;
     }
@@ -120,7 +120,7 @@ Nodo* ListaDoble::Search(int posicion){
     q=inicio;
     for(int i =0; i<posicion-1; i++){
         q=q->Rptr;
-        if(q->Rptr==NULL){
+        if(q->Rptr==nullptr){
             out("Posicion fuera");
             return NULL;
         }
@@ -129,13 +129,13 @@ Nodo* ListaDoble::Search(int posicion){
 }
 void ListaDoble::Display(){
    Nodo* q;
-    if(inicio == NULL){
+    if(inicio == nullptr){
         out("Lista vacia");
         return;
     }
     q=inicio;
     std::cout<<"\n\nLista es: ";
-    while(q!=NULL){
+    while(q!=nullptr){
         if(q->Lptr==NULL){
             std::cout<<"NULL<-";
         }else{
@@ -153,7 +153,7 @@ void ListaDoble::Display(){
     
 }
 void ListaDoble::Reverse(){
-   if(inicio==NULL){
+   if(inicio==nullptr){
         out("Lista vacia");
         return;
     }
@@ -162,13 +162,13 @@ void ListaDoble::Reverse(){
     tmp = inicio->Rptr;
     s= tmp->Rptr;
     
-    q->Rptr=NULL;
+    q->Rptr=nullptr;
     q->Lptr=tmp;
 
     tmp->Rptr=q;
     tmp->Lptr=s;
 
-    while(s!=NULL){
+    while(s!=nullptr){
         q=tmp;
         tmp=s;
         s=s->Rptr;

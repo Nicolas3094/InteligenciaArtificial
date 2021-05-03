@@ -1,12 +1,11 @@
-#include "../headers/cola.hpp"
+#include "../headers/Estructuras/cola.hpp"
 
 template <typename T>
 Cola<T>::~Cola()
 {
-    T tmp;
     while (frente != nullptr)
     {
-        pop(tmp);
+        pop();
     }
 }
 
@@ -17,7 +16,7 @@ bool Cola<T>::vacia()
 }
 
 template <typename T>
-Cola<T>::Cola():tamano(0)
+Cola<T>::Cola() : tamano(0)
 {
     cola, frente = nullptr;
 }
@@ -40,18 +39,24 @@ void Cola<T>::push(T valor)
 }
 
 template <typename T>
-void Cola<T>::pop(T &val)
+T Cola<T>::pop()
 {
-    if (frente == nullptr)
-        return;
+    T valTemp;
 
+    if (frente == nullptr)
+    {
+        delete &valTemp;
+        return valTemp;
+    }
     NodoSingular<T> *tmp;
-    val = frente->valor;
+    valTemp = frente->valor;
     tmp = frente;
     frente = tmp->ptr;
     tamano--;
     tmp = nullptr;
     tmp->~NodoSingular();
+
+    return valTemp;
 }
 template <typename T>
 void Cola<T>::recorrer(const function<void(T, bool &)> &fn, bool romper)
@@ -61,7 +66,7 @@ void Cola<T>::recorrer(const function<void(T, bool &)> &fn, bool romper)
 
     NodoSingular<T> *ini, *fin;
     ini = frente;
-    romper=false;
+    romper = false;
     while (ini != nullptr && !romper)
     {
         fn(ini->valor, romper);
@@ -74,7 +79,7 @@ void Cola<T>::recorrer(const function<void(T, bool &)> &fn, bool romper)
 template <typename T>
 T Cola<T>::operator[](int index)
 {
-    if(index<0 || index > tamano-1)
+    if (index < 0 || index > tamano - 1)
         throw invalid_argument("Index out of range");
     int i = 0;
     NodoSingular<T> *ini;
@@ -93,8 +98,7 @@ T Cola<T>::operator[](int index)
     ini->~NodoSingular();
 
     return tmp;
-
 }
 
-template class Cola<Nodo*>;
+template class Cola<Nodo *>;
 template class Cola<int>;

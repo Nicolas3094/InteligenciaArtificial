@@ -49,8 +49,7 @@ void singular()
 {
     Arbol arb;
     Estado edo;
-    edo.mov=MAX;
-
+    edo.mov = MAX;
     int resp;
 
     print("\n1. Manual. ");
@@ -68,30 +67,51 @@ void singular()
                 cout << "[" << i << "," << j << "] = ";
                 cin >> value;
 
-                if (0 <= value && value < ANCHURA_MAX * ALTURA_MAX )
+                if (0 <= value && value < ANCHURA_MAX * ALTURA_MAX)
                 {
                     if (!repetido[value])
                     {
-                        repetido[value]=true;
-                        edo.tab[i][j]=value;
-                    }else{
+                        repetido[value] = true;
+                        edo.tab[i][j] = value;
+                    }
+                    else
+                    {
                         print("Valor repetido");
                         j--;
                     }
-                }else{
-                    print("Fuera del rango [0-"<< ANCHURA_MAX * ALTURA_MAX-1 <<"].");
+                }
+                else
+                {
+                    print("Fuera del rango [0-" << ANCHURA_MAX * ALTURA_MAX - 1 << "].");
                     j--;
                 }
             }
         }
-    }else{
+    }
+    else
+    {
         edo = *Tablero::EstadoInicial();
     }
     print("\nEstado Inicial:\n");
     Tablero::Mostrar(edo);
+    Solucion *solucion;
+    print("\nAlgoritmos de busqueda: \n1. BFS\n2. A*");
+    cin >> resp;
+    if (resp == 1)
+    {
+        solucion = new BFS;
+    }
+    else if (resp == 2)
+    {
+        solucion = new As;
+    }
+    else
+    {
+        return;
+    }
     print("Iniciando busqueda...\n");
-    arb.BFS(edo);
-    if (arb.raiz == nullptr)
+    arb.EncontrarSolucion(solucion, edo);
+    if (arb.pasos == -1)
     {
         print("No se encontro solucion en conjunto.");
         return;
@@ -99,23 +119,43 @@ void singular()
     print("Solucion:");
     arb.MostarCamino(*arb.raiz);
 }
+
 void rendimiento()
 {
+    Solucion *solucion;
     map<long long int, bool> visitado;
-    int intentos = 0, fallos = 0, i;
+    int intentos = 0, fallos = 0, resp, pasosProm;
     print("Numero de intentos: ");
     cin >> intentos;
+    print("\nAlgoritmos de busqueda:\n1. BFS\n2. A*");
+    cin >> resp;
+    if (resp == 1)
+    {
+        solucion = new BFS;
+    }
+    else if (resp == 2)
+    {
+        solucion = new As;
+    }
+    else
+    {
+        return;
+    }
     for (int j = 0; j < intentos; j++)
     {
-        cout<<j<<"->";
+        cout << j << "->";
         Arbol arb;
         Estado edo = *Tablero::EstadoInicial();
         if (!visitado[Tablero::HashEstado(edo)])
         {
-            arb.BFS(*Tablero::EstadoInicial());
-            if (arb.raiz == nullptr)
+            arb.EncontrarSolucion(solucion, edo);
+            if (arb.pasos == -1)
             {
                 fallos++;
+            }
+            else
+            {
+                pasosProm += arb.pasos;
             }
             visitado[Tablero::HashEstado(edo)] = true;
         }
@@ -124,8 +164,9 @@ void rendimiento()
             j--;
         }
     }
-    cout<<"|\n";
+    cout << "|\n";
     print("Soluciones encontradas: " << intentos - fallos);
     print("Soluciones no encontradas: " << fallos);
+    print("Pasos promedio: " << float(pasosProm) / float(intentos - fallos));
     print("Rendimiento: " << (1.0 - ((long double)fallos) / ((long double)intentos)) * 100 << "%");
 }

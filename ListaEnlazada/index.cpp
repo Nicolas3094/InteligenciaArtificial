@@ -1,10 +1,10 @@
 #include <iostream>
 #include "headers/exe.hpp"
-#include "headers/listaDobleCircular.hpp"
+#include "headers/colaPrioridad.hpp"
 
 
 int main(){
         
-    exePila();
+    exePila(new ColaPrioridad<int>);
     std::cin.get();
 }

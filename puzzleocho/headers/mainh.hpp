@@ -15,7 +15,6 @@ using namespace std;
 
 #define ALTURA_MAX 3
 #define ANCHURA_MAX 3
-#define print(x) cout<<x<<"\n"
-
+#define print(x) std::cout<<x<<"\n"
 
 #endif

@@ -1,60 +1,73 @@
 #include "../headers/colaPrioridad.hpp"
-
-ColaPrioridad::ColaPrioridad(){
-    frente=NULL;
+template <typename T>
+ColaPrioridad<T>::ColaPrioridad()
+{
+    frente = NULL;
 }
+template <typename T>
+void ColaPrioridad<T>::push(T val, long prior)
+{
+    nodo<T> *tmp, *q;
+    tmp = new nodo;
+    tmp->info = val;
+    tmp->prioridad = prior;
 
-void ColaPrioridad::push(){
-    int val, prior;
-    out("Digite valor");
-    std::cin>>val;
-    out("Digite prioridad");
-    std::cin>>prior;
+    tmp->ptr = nullptr;
 
-    nodo *tmp,*q;
-    tmp = (nodo*)new(nodo);
-    
-    tmp->info=val;
-    tmp->prioridad=prior;
-
-    tmp->ptr=NULL;
-
-    if(frente==NULL || prior < frente->prioridad){
-        tmp->ptr=frente;
-        frente=tmp;
-    }else{
-        q=frente;
-        while(q->ptr!=NULL && q->ptr->prioridad<=prior){
-            q=q->ptr;
-        }
-        tmp->ptr = q->ptr;
-        q->ptr=tmp;
-
-    }
-}
-void ColaPrioridad::pop(){
-
-    if(frente==NULL){
-        out("Vacia");
+    if (vacia() || prior < frente->prioridad)
+    {
+        tmp->ptr = frente;
+        frente = tmp;
         return;
     }
-    nodo *tmp;
+    q = frente;
+    while (q->ptr != nullptr && q->ptr->prioridad <= prior)
+    {
+        q = q->ptr;
+    }
+    tmp->ptr = q->ptr;
+    q->ptr = tmp;
+}
+template <typename T>
+T ColaPrioridad<T>::pop()
+{
+    T elemento;
+    if (vacia())
+    {
+        out("Vacia");
+        delete &elemento return elemento;
+    }
+    nodo<T> *tmp;
     tmp = frente;
-    frente=tmp->ptr;
+    elemento = tmp->info;
+    frente = tmp->ptr;
+    tmp = nullptr;
     delete tmp;
+    return elemento;
 }
-void ColaPrioridad::print(){
-    if(frente==NULL){
+template <typename T>
+void ColaPrioridad<T>::print()
+{
+    if (vacia())
+    {
         out("Vacia");
         return;
     }
-    nodo *init, *fin;
-    init=frente;
-
-    while(init->ptr!=NULL){
-        std::cout<<init->info<<","<< init->prioridad <<"->"<< init->ptr->info <<"|";
-        init=init->ptr;
+    nodo<T> *init, *fin;
+    init = frente;
+    while (init->ptr != nullptr)
+    {
+        cout << init->info << "," << init->prioridad << "->" << init->ptr->info << "|";
+        init = init->ptr;
     }
-    std::cout<<init->info<<","<< init->prioridad <<"->"<< "NULL";
+    std::cout << init->info << "," << init->prioridad << "->"
+              << "NULL";
     out("");
 }
+template <typename T>
+bool ColaPrioridad<T>::vacia()
+{
+    return frente == nullptr;
+}
+
+template class ColaPrioridad<int>;
