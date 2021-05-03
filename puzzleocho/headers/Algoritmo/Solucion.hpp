@@ -1,9 +1,10 @@
 #ifndef SOLUCION_H
 #define SOLUCION_H
-#include "../Estructuras/colaPrioridad.hpp"
-#include "../Agentes/entorno.hpp"
+
 #include "Algoritmo.hpp"
 
+#include "../Agentes/entorno.hpp"
+#include "../mainh.hpp"
 
 class Solucion : public Algoritmo{
 public:

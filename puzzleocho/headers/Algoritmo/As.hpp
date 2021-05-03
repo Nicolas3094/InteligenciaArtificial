@@ -2,8 +2,9 @@
 #define ASTAR_H
 
 #include "Solucion.hpp"
+#include "../Estructuras/colaPrioridad.hpp"
 
-class As : public Solucion {
+class As : public Solucion{
 
 public:
     As();
