@@ -5,7 +5,7 @@
 #include "NodoPrioridad.hpp"
 
 template <typename T>
-class ColaPrioridad : ComunStr<T>{
+class ColaPrioridad : public ComunStr<T>{
     int tamano;
     function<long(T)> lambda;
     NodoPrioridad<T>* frente;

@@ -14,7 +14,7 @@ public:
     Arbol();
     Arbol(Nodo*);
 
-    void EncontrarSolucion(Algoritmo*, Estado&);
+    void EncontrarSolucion(Algoritmo<Nodo*>*, Estado&);
     void MostarCamino(Nodo&);
 };
 

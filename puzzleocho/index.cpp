@@ -3,5 +3,5 @@
 int main()
 {
         exe();
-        return 0;
+        cin.get();
 }

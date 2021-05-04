@@ -6,64 +6,11 @@ As::~As() {}
 
 void As::Resolver(Nodo **raiz, int &pasos)
 {
-
-    map<long long int, bool> visitados;
-
-    ColaPrioridad<Nodo*> cola([this](Nodo* nd)->long{
-        return CostoTotal(*nd);
-    });
-        
-    Estado meta = Tablero::EstadoMeta();
-
-    pasos = 0;
-
-    cola.push(*raiz);
-
-    Nodo *root = *raiz;
-
-    visitados[Tablero::HashEstado(*root->estado)] = true;
-
-    while (!cola.vacia())
-    {
-
-        *raiz = cola.pop();
-
-        root = *raiz;
-
-        if (meta == *root->estado)
-        {
-
-            root = nullptr;
-
-            root->~Nodo();
-
-            return;
-        }
-
-        list<Nodo *> rama = hijosNodo(**raiz);
-
-        for (Nodo *nodoV : rama)
-        {
-
-            long long int llave = Tablero::HashEstado(*nodoV->estado);
-
-            if (!visitados[llave])
-            {
-
-                visitados[llave] = true;
-
-                cola.push(nodoV);
-            }
-        }
-        pasos++;
-    }
-    raiz = nullptr;
-
-    root = nullptr;
-
-    root->~Nodo();
-
-    pasos = -1;
+    BusquedaGrafo(
+        raiz, 
+        pasos,
+        new ColaPrioridad<Nodo*>([this](Nodo* nd)->long{return CostoTotal(*nd);})
+    );
 }
 
 long As::CostoAlcance(Nodo &nd)
@@ -81,39 +28,24 @@ long As::CostoTotal(Nodo &nd)
 
 long As::Heuristica(Nodo *nodoActual)
 {
-
-    Estado meta, estadoActual;
-
-    meta = Tablero::EstadoMeta();
-
-    estadoActual = *nodoActual->estado;
-
     long medida = 0;
 
-    for (int i = 0; i < ALTURA_MAX; i++)
+    for (int i = 0, k = 0; i < ALTURA_MAX; i++)
     {
 
-        for (int j = 0; j < ANCHURA_MAX; j++)
+        for (int j = 0; j < ANCHURA_MAX; j++, k++)
         {
 
-            if (estadoActual.tab[i][j] != meta.tab[i][j])
+            if (nodoActual->estado->tab[i][j] != k )
             {
+                int fila = int(nodoActual->estado->tab[i][j] / 3);
 
-                int columna = estadoActual.tab[i][j] % 3;
+                int columna = nodoActual->estado->tab[i][j] % 3;
 
-                for (int fila = 0; fila < ALTURA_MAX; fila++)
-                {
-
-                    if (meta.tab[fila][columna] == estadoActual.tab[i][j])
-                    {
-
-                        medida += abs(fila - i) + abs(columna - j);
-
-                        break;
-                    }
-                }
+                medida += abs(fila - i) + abs(columna - j);
             }
         }
     }
+    
     return medida;
 }

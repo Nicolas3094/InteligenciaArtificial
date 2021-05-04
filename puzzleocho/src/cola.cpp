@@ -23,7 +23,8 @@ bool Cola<T>::vacia()
 template <typename T>
 Cola<T>::Cola() : tamano(0)
 {
-    cola, frente = nullptr;
+    frente = nullptr;
+    cola=frente;
 }
 template <typename T>
 void Cola<T>::push(T valor)

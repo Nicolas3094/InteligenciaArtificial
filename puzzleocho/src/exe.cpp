@@ -42,8 +42,6 @@ void exe()
             break;
         }
     }
-
-    cin.get();
 }
 void singular()
 {
@@ -73,6 +71,11 @@ void singular()
                     {
                         repetido[value] = true;
                         edo.tab[i][j] = value;
+                        if (value == 0)
+                        {
+                            edo.cero[0] = i;
+                            edo.cero[1] = j;
+                        }
                     }
                     else
                     {
@@ -124,7 +127,7 @@ void rendimiento()
 {
     Solucion *solucion;
     map<long long int, bool> visitado;
-    int intentos = 0, fallos = 0, resp, pasosProm;
+    int intentos = 0, fallos = 0, resp, pasosProm = 0;
     print("Numero de intentos: ");
     cin >> intentos;
     print("\nAlgoritmos de busqueda:\n1. BFS\n2. A*");
@@ -164,9 +167,10 @@ void rendimiento()
             j--;
         }
     }
-    cout << "|\n";
     print("Soluciones encontradas: " << intentos - fallos);
     print("Soluciones no encontradas: " << fallos);
     print("Pasos promedio: " << float(pasosProm) / float(intentos - fallos));
-    print("Rendimiento: " << (1.0 - ((long double)fallos) / ((long double)intentos)) * 100 << "%");
+
+    print("Rendimiento: " << 
+    (1.0 - ((long double)fallos) / ((long double)intentos)) * 100 << "%");
 }

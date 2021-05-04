@@ -27,7 +27,7 @@ void Arbol::MostarCamino(Nodo &nodo)
     print("Profundidad: " << nodo.profundidad);
     print("Pasos: " << pasos);
 }
-void Arbol::EncontrarSolucion(Algoritmo *alg, Estado &problema)
+void Arbol::EncontrarSolucion(Algoritmo<Nodo*> *alg, Estado &problema)
 {
     raiz->estado = &problema;
     raiz->profundidad = 0;

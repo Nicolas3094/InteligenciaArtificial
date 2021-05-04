@@ -1,8 +1,5 @@
 #include "../headers/Agentes/entorno.hpp"
 
-Tablero::~Tablero() {}
-Tablero::Tablero() {}
-
 void Tablero::Mostrar(const Estado &estado)
 {
     for (int i = 0; i < ANCHURA_MAX; i++)

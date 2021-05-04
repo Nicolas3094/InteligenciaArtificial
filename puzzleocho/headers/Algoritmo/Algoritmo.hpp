@@ -3,8 +3,9 @@
 
 #include "../Estructuras/nodo.hpp"
 
+template<typename T>
 class Algoritmo{
 public:
-    virtual void Resolver(Nodo**, int&)=0;
+    virtual void Resolver(T*, int&)=0;
 };
 #endif

@@ -9,7 +9,6 @@ public:
     virtual T pop()=0;
     virtual bool vacia()=0;
     virtual void vaciar()=0;
-    
 };
 
 #endif

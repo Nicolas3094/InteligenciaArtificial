@@ -5,7 +5,7 @@
 #include "NodoSingular.hpp"
 
 template <typename T>
-class Cola : ComunStr<T>{
+class Cola : public ComunStr<T>{
     int tamano;
     NodoSingular<T>* frente;
     NodoSingular<T>* cola;
